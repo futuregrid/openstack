@@ -18,17 +18,17 @@ if [ -f /$HOMEDIR/$NOVAFILE ]
     echo "$NOVAFILE already exists."
 else
 
-  echo " ..... creating nova user $USERNAME in OpenStack cactus in
-$NOVANODE ...... "
+  echo " ..... creating nova user $USERNAME in OpenStack cactus in $NOVANODE ...... "
    nova-manage user create $USERNAME
- nova-manage project add fguser $USERNAME
-  nova-manage role add $USERNAME netadmin
+   nova-manage project add fguser $USERNAME
+   nova-manage role add $USERNAME netadmin
    nova-manage role add $USERNAME netadmin fguser
    nova-manage role add $USERNAME sysadmin
-  nova-manage role add $USERNAME sysadmin fguser
+   nova-manage role add $USERNAME sysadmin fguser
    nova-manage project zipfile fguser $USERNAME $NOVADIR/$USERNAME-nova.zip
- zip $NOVADIR/$USERNAME-nova.zip $NOVADIR/runinstance.sh
-  zip $NOVADIR/$USERNAME-nova.zip $NOVADIR/allip.sh
+  # zip the custom script needed for ip association 
+   zip $NOVADIR/$USERNAME-nova.zip $NOVADIR/runinstance.sh
+   zip $NOVADIR/$USERNAME-nova.zip $NOVADIR/allip.sh
 
  # now copy the file to the user homedir
   echo "copying $USERNAME-nova.zip to home directory"
